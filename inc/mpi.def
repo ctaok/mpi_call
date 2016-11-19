@@ -1,0 +1,9 @@
+CFG(SWITCH_JOB, switch_job, "Switch job")
+CFG(GRAD, grad, "Grad")
+CFG(GET_ERROR, get_error, "Get error")
+CFG(GATHER_MODEL, gather_model, "Gather model")
+CFG(SCATTER_MODEL, scatter_model, "Scatter model")
+CFG(FINISH, finish, "Finish")
+CFG(INVALID, invalid, "INVALID")
+
+#undef CFG
