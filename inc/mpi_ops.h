@@ -4,6 +4,7 @@
 #include <map>
 #include <stdexcept>
 #include "mpi.h"
+#include "common.h"
 //#include "atomic.h"
 
 extern pthread_mutex_t mpi_mutex;

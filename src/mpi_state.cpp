@@ -27,7 +27,7 @@ int64_t mpi_state_t::init( int argc, char ** argv )
     {
         MPI_Call(MPI_LOCK_UNLOCK, MPI_Comm_split, MPI_COMM_WORLD, MPI_UNDEFINED, 0, &_worker_comm);
     }
-    else 
+    else
     {
         MPI_Call(MPI_LOCK_UNLOCK, MPI_Comm_split, MPI_COMM_WORLD, 1, 0, &_worker_comm);
         MPI_Call(MPI_LOCK_UNLOCK, MPI_Comm_size, _worker_comm, &_worker_size);
@@ -42,6 +42,7 @@ int64_t mpi_state_t::init( int argc, char ** argv )
     {
         _role = WORKER_NODE;
     }
+	_role = WORKER_NODE;
 
     //config_t * config_obj = config_t::get_obj();
 
@@ -68,7 +69,8 @@ int64_t mpi_state_t::init( int argc, char ** argv )
 
 void mpi_state_t::deinit()
 {
-    delete[] _reqs;
+	if (_reqs)
+		delete[] _reqs;
     _reqs = NULL;
 }
 

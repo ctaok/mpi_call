@@ -3,9 +3,7 @@
 
 #include "mpi.h"
 #include "mpi_ops.h"
-
-typedef float valueType_t;
-#define MPI_ValueType OMPI_PREDEFINED_GLOBAL(MPI_Datatype, ompi_mpi_float)
+#include "common.h"
 
 typedef enum {
     MASTER_NODE = 1,

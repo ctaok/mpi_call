@@ -1,0 +1,72 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CPPFLAGS	Makefile	/^	CPPFLAGS = -O0 -g -Wall -D_DEBUG -std=c++11 -D_STRICT_FLOAT_COMPARISON -D_GUN_SOURCE -Wfloat-equal -Wall -Winline -pipe$/;"	m
+CPPFLAGS	Makefile	/^	CPPFLAGS = -O3 -fopenmp -mavx -m64 -D_GUN_SOURCE -std=c++11 -D_STRICT_FLOAT_COMPARISON  -Wfloat-equal -Wall -Winline --param large-function-growth=10000 -pipe$/;"	m
+CXX	Makefile	/^CXX = mpic++$/;"	m
+GCC	Makefile	/^	GCC = mpic++$/;"	m
+INCDIR	Makefile	/^INCDIR=	\\$/;"	m
+INVALID_NODE	inc/mpi_state.h	/^    INVALID_NODE$/;"	e	enum:__anon2
+LIBDIR	Makefile	/^LIBDIR=	\\$/;"	m
+MASTER_NODE	inc/mpi_state.h	/^    MASTER_NODE = 1,$/;"	e	enum:__anon2
+MPI_Call	inc/mpi_ops.h	/^void MPI_Call(uint32_t lock, F f, Args... args) {$/;"	f
+MPI_LOCK	inc/mpi_ops.h	/^    MPI_LOCK = 1,$/;"	e	enum:__anon1
+MPI_LOCK_FREE	inc/mpi_ops.h	/^    MPI_LOCK_FREE = 0,$/;"	e	enum:__anon1
+MPI_LOCK_UNLOCK	inc/mpi_ops.h	/^    MPI_LOCK_UNLOCK = 3$/;"	e	enum:__anon1
+MPI_MAX_COMM_SIZE	inc/mpi_ops.h	65;"	d
+MPI_Recv_large	src/mpi_ops.cpp	/^int MPI_Recv_large(void *buf, long long count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm)$/;"	f
+MPI_Send_large	src/mpi_ops.cpp	/^int MPI_Send_large(const void *buf, long long count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm)$/;"	f
+MPI_UNLOCK	inc/mpi_ops.h	/^    MPI_UNLOCK = 2,$/;"	e	enum:__anon1
+MPI_ValueType	inc/mpi_state.h	8;"	d
+OBJ	Makefile	/^OBJ = $(patsubst $(SRCDIR)%.cpp,$(OBJDIR)%.o,$(SRC))$/;"	m
+OBJDIR	Makefile	/^OBJDIR = obj.$(SYSTEM).$(OPT).$(CXX)$/;"	m
+OPT	Makefile	/^OPT = release$/;"	m
+P	src/mpi_ops.cpp	11;"	d	file:
+PR	src/mpi_ops.cpp	12;"	d	file:
+PRINT	src/mpi_test.cpp	9;"	d	file:
+SRC	Makefile	/^SRC = $(wildcard $(SRCDIR)\/*.cpp)$/;"	m
+SRCDIR	Makefile	/^SRCDIR=	\\$/;"	m
+SYSTEM	Makefile	/^SYSTEM = $(shell uname)$/;"	m
+TARGET	Makefile	/^TARGET = test_mpicall$/;"	m
+WORKER_NODE	inc/mpi_state.h	/^    WORKER_NODE,$/;"	e	enum:__anon2
+_MPIOPS_H	inc/mpi_ops.h	2;"	d
+_MPISTATE_H	inc/mpi_state.h	2;"	d
+_all_buf_mem_size	inc/mpi_state.h	/^	int64_t _all_buf_mem_size;$/;"	m	class:mpi_state_t
+_rank	inc/mpi_state.h	/^	int _rank;$/;"	m	class:mpi_state_t
+_reqs	inc/mpi_state.h	/^	MPI_Request * _reqs;$/;"	m	class:mpi_state_t
+_role	inc/mpi_state.h	/^    role_t _role;$/;"	m	class:mpi_state_t
+_size	inc/mpi_state.h	/^	int _size;$/;"	m	class:mpi_state_t
+_status	inc/mpi_state.h	/^	MPI_Status _status;$/;"	m	class:mpi_state_t
+_worker_comm	inc/mpi_state.h	/^    MPI_Comm _worker_comm;$/;"	m	class:mpi_state_t
+_worker_rank	inc/mpi_state.h	/^    int _worker_rank;$/;"	m	class:mpi_state_t
+_worker_size	inc/mpi_state.h	/^    int _worker_size;$/;"	m	class:mpi_state_t
+combine_global_cluster_info	inc/mpi_state.h	/^inline int64_t combine_global_cluster_info(valueType_t & node_val)$/;"	f
+combine_local_cluster_info	inc/mpi_state.h	/^inline int64_t combine_local_cluster_info(valueType_t & node_val)$/;"	f
+deinit	src/mpi_state.cpp	/^void mpi_state_t::deinit()$/;"	f	class:mpi_state_t
+func_infos	src/mpi_ops.cpp	/^std::map<long, mpi_func_info> func_infos = {$/;"	v
+get_all_buf_mem_size	inc/mpi_state.h	/^	int64_t get_all_buf_mem_size() { return _all_buf_mem_size; }$/;"	f	class:mpi_state_t
+get_func_info	inc/mpi_ops.h	/^mpi_func_info* get_func_info(F f) {$/;"	f
+get_obj	inc/mpi_state.h	/^	static mpi_state_t * get_obj()$/;"	f	class:mpi_state_t
+get_rank	inc/mpi_state.h	/^	int get_rank() { return _rank; }$/;"	f	class:mpi_state_t
+get_reqs	inc/mpi_state.h	/^	MPI_Request * get_reqs() { return _reqs; }$/;"	f	class:mpi_state_t
+get_role	inc/mpi_state.h	/^    role_t get_role() {return _role; }$/;"	f	class:mpi_state_t
+get_size	inc/mpi_state.h	/^	int get_size() { return _size; }$/;"	f	class:mpi_state_t
+get_status	inc/mpi_state.h	/^	MPI_Status * get_status() { return &_status; }$/;"	f	class:mpi_state_t
+get_worker_comm	inc/mpi_state.h	/^	MPI_Comm get_worker_comm() { return _worker_comm; }$/;"	f	class:mpi_state_t
+get_worker_rank	inc/mpi_state.h	/^	int get_worker_rank() { return _worker_rank; }$/;"	f	class:mpi_state_t
+get_worker_size	inc/mpi_state.h	/^	int get_worker_size() { return _worker_size; }$/;"	f	class:mpi_state_t
+init	src/mpi_state.cpp	/^int64_t mpi_state_t::init( int argc, char ** argv )$/;"	f	class:mpi_state_t
+log_mpi_call	inc/mpi_ops.h	/^void log_mpi_call(F f, Args... args) {$/;"	f
+main	src/mpi_test.cpp	/^int main(int argc, char * argv[])$/;"	f
+mpi_func_info	inc/mpi_ops.h	/^struct mpi_func_info {$/;"	s
+mpi_mutex	src/mpi_state.cpp	/^pthread_mutex_t mpi_mutex = PTHREAD_MUTEX_INITIALIZER;$/;"	v
+mpi_state_t	inc/mpi_state.h	/^	mpi_state_t(){};$/;"	f	class:mpi_state_t
+mpi_state_t	inc/mpi_state.h	/^class mpi_state_t$/;"	c
+name	inc/mpi_ops.h	/^    std::string name;$/;"	m	struct:mpi_func_info
+role_t	inc/mpi_state.h	/^} role_t;$/;"	t	typeref:enum:__anon2
+valueType_t	inc/mpi_state.h	/^typedef float valueType_t;$/;"	t
+~mpi_func_info	inc/mpi_ops.h	/^    ~mpi_func_info() {};$/;"	f	struct:mpi_func_info
+~mpi_state_t	inc/mpi_state.h	/^	~mpi_state_t(){};$/;"	f	class:mpi_state_t
