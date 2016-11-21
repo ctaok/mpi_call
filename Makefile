@@ -2,8 +2,8 @@
 # Variables setting
 # -------------------------------------------------
 SYSTEM = $(shell uname)
-OPT = release
-#OPT = debug
+#OPT = release
+OPT = debug
 CXX = mpic++
 TARGET = test_mpicall
 

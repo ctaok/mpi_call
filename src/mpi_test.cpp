@@ -6,8 +6,8 @@
 #include "mpi_test.h"
 #include "mpi_ops.h"
 #include "mpi_state.h"
+#include "common.h"
 
-#define PRINT(format, args...) fprintf(stdout, format"\n", ##args)
 
 int master_test_handler(master_info_t * info)
 {
@@ -66,22 +66,23 @@ int master_entry(void)
 		if (ret < 0)
 			break;
 	}
+	return 0;
 }
 
 int work_entry(void)
 {
 	msg_head_t head;
-	MPI_Status status;
-	int myrank = mpi_state_t::get_obj()->get_rank();
+	//int myrank = mpi_state_t::get_obj()->get_rank();
 
 	head.type = MSG_TYPE_TEST;
-	head.kind = 1;
+	head.kind = mpi_state_t::get_obj()->get_rank();
 	valueType_t* ptr = (valueType_t*)head.data;
-	ptr[0] = myrank;
-	ptr[1] = myrank;
-	ptr[2] = myrank;
-	ptr[3] = myrank;
+	ptr[0] = head.kind;
+	ptr[1] = head.kind;
+	ptr[2] = head.kind;
+	ptr[3] = head.kind;
     MPI_Call(MPI_LOCK_UNLOCK, MPI_Gather, &head, sizeof(head), MPI_CHAR, &head, sizeof(head), MPI_CHAR, 0, MPI_COMM_WORLD);
+	return 0;
 }
 
 int main(int argc, char * argv[])

@@ -42,7 +42,6 @@ int64_t mpi_state_t::init( int argc, char ** argv )
     {
         _role = WORKER_NODE;
     }
-	_role = WORKER_NODE;
 
     //config_t * config_obj = config_t::get_obj();
 
