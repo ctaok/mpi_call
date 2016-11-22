@@ -11,8 +11,26 @@
 
 int master_test_handler(master_info_t * info)
 {
-	PRINT("master_node");
+	PRINT("master_test");
+	int comm_size = 0;
+	int i = 0;
+	mpi_state_t * mpi_obj = mpi_state_t::get_obj();
+	comm_size = mpi_obj->get_size();
+	valueType_t tmp[100];
+	for (int k=0; k<100; k++)
+		tmp[k] = k+100.0f;
+	for (i = 1; i < comm_size; i++) {
+		if (100 <= MPI_MAX_COMM_SIZE)
+			MPI_Call(MPI_LOCK_UNLOCK, MPI_Send, tmp+100/(comm_size-1)*(i-1), 100/(comm_size-1), MPI_ValueType, i, i, MPI_COMM_WORLD);
+		else
+			MPI_Send_large(tmp+100/(comm_size-1)*(i-1), 100/(comm_size-1), MPI_ValueType, i, i, MPI_COMM_WORLD);
+	}
 	return 0;
+}
+
+int master_finish_handler(master_info_t * info)
+{
+	return -1;
 }
 
 int master_invalid_handler(master_info_t * info)
@@ -66,22 +84,42 @@ int master_entry(void)
 		if (ret < 0)
 			break;
 	}
+	mpi_obj->deinit();
+	MPI_Call(MPI_LOCK_UNLOCK, MPI_Finalize);
+	PRINT("master finished!");
+	local_info.head = NULL;
+	delete head;
 	return 0;
 }
 
 int work_entry(void)
 {
 	msg_head_t head;
-	//int myrank = mpi_state_t::get_obj()->get_rank();
 
 	head.type = MSG_TYPE_TEST;
-	head.kind = mpi_state_t::get_obj()->get_rank();
+	head.kind = 1;
 	valueType_t* ptr = (valueType_t*)head.data;
 	ptr[0] = head.kind;
 	ptr[1] = head.kind;
 	ptr[2] = head.kind;
 	ptr[3] = head.kind;
     MPI_Call(MPI_LOCK_UNLOCK, MPI_Gather, &head, sizeof(head), MPI_CHAR, &head, sizeof(head), MPI_CHAR, 0, MPI_COMM_WORLD);
+
+	mpi_state_t * mpi_obj = mpi_state_t::get_obj();
+	int comm_size = mpi_obj->get_size();
+	const int revSize = 100/(comm_size-1);
+	valueType_t tmp[revSize];
+	int myrank = mpi_state_t::get_obj()->get_rank();
+	MPI_Status status;
+	int count = 0;
+	MPI_Call(MPI_LOCK_UNLOCK, MPI_Recv, tmp, revSize, MPI_ValueType, 0, myrank, MPI_COMM_WORLD, &status);
+	MPI_Call(MPI_LOCK_UNLOCK, MPI_Get_count, &status, MPI_ValueType, &count);
+	if (count != revSize) {
+		PRINT("MPI_Recv %d elements, but expect %d", count, revSize);
+	}
+	for (int k=0; k<revSize; k++)
+		printf("%lf, ", tmp[k]);
+	PRINT();
 	return 0;
 }
 
@@ -99,11 +137,16 @@ int main(int argc, char * argv[])
 		ret = master_entry();
 		return ret; 
 	}
-	sleep(5);
 	work_entry();
 
 MPI_ABORT:
 	mpi_obj->deinit();
+	msg_head_t head;
+	head.type = MSG_TYPE_FINISH;
+	head.kind = 1;
+	MPI_Call(MPI_LOCK_UNLOCK, MPI_Gather, &head, sizeof(head), MPI_CHAR, &head, sizeof(head), MPI_CHAR, 0, MPI_COMM_WORLD);
 	MPI_Call(MPI_LOCK_UNLOCK, MPI_Finalize);
+	PRINT("work finished!");
 	return 0;
 }
+

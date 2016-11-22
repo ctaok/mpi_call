@@ -1,4 +1,5 @@
 CFG(TEST, test, "Test")
 CFG(INVALID, invalid, "INVALID")
+CFG(FINISH, finish, "Finish")
 
 #undef CFG
